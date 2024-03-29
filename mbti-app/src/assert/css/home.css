@@ -1,0 +1,11 @@
+.header{ 
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    background: linear-gradient(0deg,rgba(0,0,0,.05),rgba(0,0,0,.05)),linear-gradient(180deg,#01543a,#2a9d60 45.18%,#78af4c 85.49%);
+}
+
+.header-home h1{
+    margin-top: 50px;
+    font-size: 50px;
+}
