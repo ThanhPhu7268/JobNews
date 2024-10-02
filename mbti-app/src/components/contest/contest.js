@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
 import { Card, Radio, Progress, Typography } from "@material-tailwind/react";
+import {
+     Drawer,
+     Button,
+     IconButton,
+} from "@material-tailwind/react";
+import '../../assert/css/contest.css'
+import { Link } from "react-router-dom";
+
+
 const Quiz = () => {
      const questions = [
           {
@@ -117,7 +126,10 @@ const Quiz = () => {
           {
                question: "Theo bạn, các nhà văn nên:",
                options: [
-                    { text: "Viết chính xác những gì họ nghĩ, diễn đạt một cách rõ ràng, nghĩa trên mặt chữ", personality: "J" },
+                    {
+                         text: "Viết chính xác những gì họ nghĩ, diễn đạt một cách rõ ràng, nghĩa trên mặt chữ",
+                         personality: "J"
+                    },
                     { text: "Diễn đạt bằng biện pháp so sánh, liên tưởng, ví von thâm sâu", personality: "P" }
                ]
           },
@@ -363,7 +375,10 @@ const Quiz = () => {
                question: "Bạn thường:",
                options: [
                     { text: "Giải quyết vấn đề một cách thực tế và hiệu quả (có thể áp dụng được ngay)", personality: "S" },
-                    { text: "Nghĩ ra những giải pháp sáng tạo và độc đáo (có thể không thực hiện ngay được)", personality: "N" }
+                    {
+                         text: "Nghĩ ra những giải pháp sáng tạo và độc đáo (có thể không thực hiện ngay được)",
+                         personality: "N"
+                    }
                ]
           },
           {
@@ -390,7 +405,10 @@ const Quiz = () => {
           {
                question: "Trong một mối quan hệ:",
                options: [
-                    { text: "Điều gì cũng có thể thương lượng và điều chỉnh lại để đạt được sự đồng thuận chung", personality: "J" },
+                    {
+                         text: "Điều gì cũng có thể thương lượng và điều chỉnh lại để đạt được sự đồng thuận chung",
+                         personality: "J"
+                    },
                     { text: "Nên để mọi chuyện diễn ra tự nhiên, thuận theo hoàn cảnh đưa đẩy", personality: "P" }
                ]
           },
@@ -426,7 +444,10 @@ const Quiz = () => {
                question: "Bạn thuộc tuýp người:",
                options: [
                     { text: "Mạnh mẽ, quyết đoán, không dễ bị thuyết phục", personality: "T" },
-                    { text: "Mềm mỏng, dễ bị thuyết phục, dễ thay đổi quan điểm dưới ảnh hưởng của người khác", personality: "F" }
+                    {
+                         text: "Mềm mỏng, dễ bị thuyết phục, dễ thay đổi quan điểm dưới ảnh hưởng của người khác",
+                         personality: "F"
+                    }
                ]
           },
           {
@@ -503,12 +524,16 @@ const Quiz = () => {
                question: "Cuối tuần, bạn thường làm gì để giải tỏa căng thẳng hoặc tìm kiếm năng lượng?",
                options: [
                     { text: "Tôi thích ở nhà, đọc sách, xem phim hoặc thực hiện các hoạt động một mình.", personality: "I" },
-                    { text: "Tôi thích gặp gỡ bạn bè, tham gia các sự kiện xã hội hoặc đi du lịch và tham gia vào các hoạt động ngoại khóa.", personality: "E" }
+                    {
+                         text: "Tôi thích gặp gỡ bạn bè, tham gia các sự kiện xã hội hoặc đi du lịch và tham gia vào các hoạt động ngoại khóa.",
+                         personality: "E"
+                    }
                ]
           },
           // Thêm các câu hỏi và lựa chọn khác tương tự ở đây
      ];
-
+     const [finalResult, setFinalResult] = useState('')
+     const [link, setLink] = useState('/mbti/mbti/')
      const [userAnswers, setUserAnswers] = useState(new Array(questions.length).fill(''));
      const [completed, setCompleted] = useState(false); // Trạng thái hoàn thành bài trắc nghiệm
 
@@ -525,7 +550,6 @@ const Quiz = () => {
 
 
      const getResult = () => {
-
           const personalityCounts = {
                E: 0,
                I: 0,
@@ -536,7 +560,6 @@ const Quiz = () => {
                J: 0,
                P: 0
           };
-
           userAnswers.forEach(personality => {
                personalityCounts[personality]++;
           });
@@ -549,10 +572,42 @@ const Quiz = () => {
           result += personalityCounts.T > personalityCounts.F ? 'T' : 'F';
           result += personalityCounts.J > personalityCounts.P ? 'J' : 'P';
 
+          if (result === 'ISTJ') {
+               return { result: 'ISTJ', id: 1 };
+          } else if (result === 'ISFP') {
+               return { result: 'ISFP', id: 2 };
+          } else if (result === 'INFP') {
+               return { result: 'INFP', id: 3 };
+          } else if (result === 'INTJ') {
+               return { result: 'INTJ', id: 4 };
+          } else if (result === 'ISFJ') {
+               return { result: 'ISFJ', id: 5 };
+          } else if (result === 'ISTP') {
+               return { result: 'ISTP', id: 6 };
+          } else if (result === 'INTJ') {
+               return { result: 'INTJ', id: 7 };
+          } else if (result === 'INTP') {
+               return { result: 'INTP', id: 8 };
+          } else if (result === 'ENFJ') {
+               return { result: 'ENFJ', id: 9 };
+          } else if (result === 'ENTJ') {
+               return { result: 'ENTJ', id: 10 };
+          } else if (result === 'ESFJ') {
+               return { result: 'ESFJ', id: 11 };
+          } else if (result === 'ESTJ') {
+               return { result: 'ESTJ', id: 12 };
+          } else if (result === 'ENFP') {
+               return { result: 'ENFP', id: 13 };
+          } else if (result === 'ENTP') {
+               return { result: 'ENTP', id: 14 };
+          } else if (result === 'ESFP') {
+               return { result: 'ESFP', id: 15 };
+          } else if (result === 'ESTP') {
+               return { result: 'ESTP', id: 16 };
+          }
           // Chuyển hướng dựa trên kết quả tính cách
-          return result;
+          return { result };
      };
-
 
      const isAllQuestionsAnswered = () => {
           return userAnswers.every(answer => answer !== '');
@@ -560,25 +615,38 @@ const Quiz = () => {
 
      const answeredQuestionsCount = userAnswers.filter(answer => answer !== '').length;
 
-
-
      return (
           <div className="min-h-screen py-8">
                <div className="max-w-4xl mx-auto">
-                    <ProgressLabelOutside completed={completed} answeredQuestionsCount={answeredQuestionsCount} totalQuestionsCount={questions.length} />
+                    <ProgressLabelOutside completed={completed} answeredQuestionsCount={answeredQuestionsCount}
+                         totalQuestionsCount={questions.length} userAnswers={userAnswers} />
                     {questions.map((question, index) => (
-                         <Card key={index} className="mb-8" >
+                         <Card key={index} className="mb-8" id={index}>
                               <Card.Body>
                                    <div style={{ width: '100%' }}>
-                                        <h2 className="text-lg font-medium mb-4" style={{ color: 'rgb(48 48 48)', fontSize: '28px', fontWeight: '700' }}>{index + 1}. {question.question}</h2>
+                                        <h2 className="text-lg font-medium mb-4" style={{
+                                             color: 'rgb(48 48 48)',
+                                             fontSize: '28px',
+                                             fontWeight: '700'
+                                        }}>{index + 1}. {question.question}</h2>
                                         <div className="grid grid-cols-2 gap-4">
                                              {question.options.map((option, optionIndex) => (
                                                   <div key={optionIndex}
-                                                       className="flex items-center border border-gray-300 hover:border-green-500 rounded-lg transition duration-300 p-2"
-                                                       style={{ borderRadius: '30px', fontWeight: '500' }}
+                                                       className="flex items-center hover:border-green-500 rounded-lg transition duration-300 p-2"
+                                                       style={{
+                                                            borderRadius: '24px',
+                                                            fontWeight: '400',
+                                                            border: '1px solid #e3e3e3'
+                                                       }}
                                                   >
                                                        <Radio
                                                             color="black"
+                                                            style={{
+                                                                 height: '25px',
+                                                                 width: '25px',
+                                                                 borderRadius: '50%',
+                                                                 margin: '0'
+                                                            }}
                                                             id={`option-${index}-${optionIndex}`}
                                                             name={`question-${index}`}
                                                             value={option.personality}
@@ -588,6 +656,7 @@ const Quiz = () => {
                                                                       className="h-3 w-3"
                                                                       viewBox="0 0 20 20"
                                                                       fill="currentColor"
+                                                                      style={{ margin: 0 }}
                                                                  >
                                                                       <path
                                                                            fillRule="evenodd"
@@ -599,7 +668,9 @@ const Quiz = () => {
                                                             checked={userAnswers[index] === option.personality}
                                                             onChange={() => handleAnswerClick(index, option.personality)}
                                                        />
-                                                       <label htmlFor={`option-${index}-${optionIndex}`} className="ml-2">{option.text}</label>
+                                                       <label style={{ fontWeight: '700', color: 'black', margin: '0' }}
+                                                            htmlFor={`option-${index}-${optionIndex}`}
+                                                            className="ml-2">{option.text}</label>
                                                   </div>
                                              ))}
                                         </div>
@@ -615,20 +686,56 @@ const Quiz = () => {
                                    } else {
                                         alert('Vui lòng hoàn thành tất cả câu hỏi trước khi xem kết quả.');
                                    }
+                                   const { result, id } = getResult();
+                                   setFinalResult(result)
+                                   setLink(`/mbti/mbti/${id}`)
                               }} className="hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-                                   style={{ background: 'linear-gradient(273deg,#c0ce20 13.76%,#26cd70 60.24%,#0cd064 96.97%)', borderRadius: '50px', fontSize: '24px', width: '300px', height: '64px' }}
+                                   style={{
+                                        background: 'linear-gradient(273deg, rgb(68 32 206) 13.76%, rgb(38 180 205) 60.24%, rgb(207 12 208) 96.97%)',
+                                        borderRadius: '50px',
+                                        fontSize: '24px',
+                                        width: '300px',
+                                        height: '64px',
+                                        border: '2px solid white'
+                                   }}
                               >
                                    Xem kết quả
                               </button>
                          </div>
                     ) : (
                          <div className="text-center">
-                              <h2 className="text-xl font-medium mb-4">Kết quả của bạn:</h2>
-                              <p className="text-lg font-semibold mb-4">{getResult()}</p>
-                              <button onClick={restartQuiz} className="bg-white border border-black hover:bg-black hover:text-white text-black font-semibold py-2 px-4 rounded"
-                                   style={{ width: '300px', height: '64px', fontSize: '24px', borderRadius: '30px', border: '1px solid #ccc' }}>
+                              <h2 style={{ fontSize: '40px', fontWeight: '700', color: 'white' }}>Kết quả của bạn:</h2>
+                              <p style={{ fontSize: '30px', padding: '10px', color: 'white' }}>{finalResult}</p>
+                              <button onClick={restartQuiz}
+                                   className="bg-white border border-black hover:bg-black hover:text-white text-white font-semibold py-2 px-4 rounded"
+                                   style={{
+                                        background: 'linear-gradient(273deg, rgb(68 32 206) 13.76%, rgb(38 180 205) 60.24%, rgb(207 12 208) 96.97%)',
+                                        borderRadius: '50px',
+                                        fontSize: '21px',
+                                        width: '300px',
+                                        height: '64px',
+                                        border: '2px solid white',
+                                        color: 'white',
+                                        margin: '15px'
+                                   }}>
                                    Làm lại bài trắc nghiệm
                               </button>
+                              <Link to={link}>
+                                   <button
+                                        className="bg-white border border-black hover:bg-black hover:text-white text-white font-semibold py-2 px-4 rounded"
+                                        style={{
+                                             background: 'linear-gradient(273deg, rgb(206 32 63) 13.76%, rgb(38 49 205) 60.24%, rgb(12 208 192) 96.97%)',
+                                             borderRadius: '50px',
+                                             fontSize: '24px',
+                                             width: '300px',
+                                             height: '64px',
+                                             border: '2px solid white',
+                                             color: 'white',
+                                             margin: '15px'
+                                        }}>
+                                        Xem chi tiết
+                                   </button>
+                              </Link>
                          </div>
                     )}
                </div>
@@ -636,23 +743,59 @@ const Quiz = () => {
      );
 };
 
-const ProgressLabelOutside = ({ completed, answeredQuestionsCount, totalQuestionsCount }) => {
+const ProgressLabelOutside = ({ completed, answeredQuestionsCount, totalQuestionsCount, userAnswers }) => {
      const percentage = ((answeredQuestionsCount / totalQuestionsCount) * 100).toFixed(1);
-     const progressColor = completed ? 'bg-green-500' : 'bg-black'; // Màu của phần đã hoàn thành hoặc chưa hoàn thành
+     const progressColor = completed ? 'bg-white' : 'bg-black'; // Màu của phần đã hoàn thành hoặc chưa hoàn thành
+     const [openRight, setOpenRight] = React.useState(false);
+     const openDrawerRight = () => setOpenRight(true);
+     const closeDrawerRight = () => setOpenRight(false);
 
      return (
-          <div className="w-full mb-8" style={{ background: 'rgb(40 205 144)', height: '72px', padding: '5px', position: 'fixed', zIndex: '72', left: '0', top: '0', right: '0' }}>
+          <div className="w-full mb-8" style={{
+               background: 'linear-gradient(283deg, black, #646fef)',
+               height: '80px',
+               padding: '5px',
+               position: 'fixed',
+               zIndex: '72',
+               left: '0',
+               top: '0',
+               right: '0'
+          }}>
                <div className="flex items-center justify-between gap-4">
-                    <Typography color="white" variant="h6">
-                         Completed
+                    <Typography color="white" variant="h6" style={{ paddingLeft: '15px' }}>
+                         {answeredQuestionsCount} / {totalQuestionsCount}
                     </Typography>
                     <Typography color="white" variant="h6">
-                         {completed ? '100%' : `${percentage}%`}
+                         {/*{completed ? '100%' : `${percentage}%`}*/}
+                         <Button onClick={openDrawerRight}
+                              style={{ border: 'none', background: 'none', fontSize: '15px', textTransform: 'none' }}>Xem
+                              chi tiết</Button>
                     </Typography>
                </div>
-               <div className="relative bg-gray-200 h-4 rounded-full overflow-hidden" style={{ background: 'white', width: '90%', margin: 'auto' }}>
-                    <div className={`absolute left-0 top-0 h-full ${progressColor}`} style={{ width: completed ? '100%' : `${percentage}%` }}></div>
+               <div className="relative bg-gray-200 h-4 rounded-full overflow-hidden"
+                    style={{ background: 'white', width: '90%', margin: 'auto' }}>
+                    <div className={`absolute left-0 top-0 h-full ${progressColor}`}
+                         style={{ width: completed ? '100%' : `${percentage}%` }}></div>
                </div>
+               <Drawer
+                    placement="right"
+                    open={openRight}
+                    size={450}
+                    onClose={closeDrawerRight}
+                    className="p-4 drawer-container"
+               >
+                    <p style={{ fontSize: '27px', fontWeight: '600', marginBottom: '20px' }}>Bạn đã trả lời <span
+                         style={{ color: 'blue' }}>{answeredQuestionsCount}/{totalQuestionsCount}</span></p>
+                    <div className="question-container">
+                         {userAnswers.map((answer, index) => (
+                              <div className="question-item" key={index}>
+                                   <a href={`#${index - 1}`} className="flex">
+                                        Câu {index + 1} <input checked={answer} type={"checkbox"} className="custom-checkbox" />
+                                   </a>
+                              </div>
+                         ))}
+                    </div>
+               </Drawer>
           </div>
      );
 
